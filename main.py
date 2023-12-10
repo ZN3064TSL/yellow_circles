@@ -3,15 +3,15 @@ import random
 
 from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.QtGui import QPainter, QColor
-from PyQt5 import uic
+from UI import Ui_Form
 
 
-class Window(QWidget):
+class Window(QWidget, Ui_Form):
     '''Класс окна программы'''
 
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
 
         self.do_paint = False
         self.pushButton.clicked.connect(self.paint)
@@ -32,7 +32,9 @@ class Window(QWidget):
 
     def drawCircle(self, qp):
         '''Метод рисует окружности при нажатии self.pushButton'''
-        qp.setBrush(QColor(255, 255, 0))
+        qp.setBrush(QColor(random.randint(0, 255),
+                           random.randint(0, 255),
+                           random.randint(0, 255)))
         x = random.randint(0, 509)
         y = random.randint(0, 509)
         size = random.randint(0, 250)
